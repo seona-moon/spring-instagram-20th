@@ -1,13 +1,13 @@
-package com.ceos20_instagram.seona;
+package com.ceos20_instagram;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SeonaApplication {
+public class InstagramApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SeonaApplication.class, args);
+		SpringApplication.run(InstagramApplication.class, args);
 	}
 
 }

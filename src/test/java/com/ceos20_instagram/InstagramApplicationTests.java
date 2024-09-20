@@ -1,10 +1,10 @@
-package com.ceos20_instagram.seona;
+package com.ceos20_instagram;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SeonaApplicationTests {
+class InstagramApplicationTests {
 
 	@Test
 	void contextLoads() {
