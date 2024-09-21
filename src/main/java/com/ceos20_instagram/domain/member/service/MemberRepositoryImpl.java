@@ -4,8 +4,10 @@ import com.ceos20_instagram.domain.member.entity.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class MemberRepositoryImpl implements MemberRepository {
 
     // 데이터베이스에 대한 CRUD 작업을 수동으로 처리
@@ -47,4 +49,3 @@ public class MemberRepositoryImpl implements MemberRepository {
         }
     }
 }
-

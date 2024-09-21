@@ -4,8 +4,10 @@ import com.ceos20_instagram.domain.post.entity.Post;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class PostRepositoryImpl implements PostRepository{
     @PersistenceContext
     private EntityManager entityManager;

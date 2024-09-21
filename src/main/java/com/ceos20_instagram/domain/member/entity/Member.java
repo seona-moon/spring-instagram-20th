@@ -89,4 +89,13 @@ public class Member extends BaseEntity {
     // 채팅 메시지 연관관계
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatMessage> chatMessages;
+
+    // 필드 값을 설정할 수 있는 생성자 추가
+    public Member(String phone, String email, String password, String name, String nickname) {
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+    }
 }

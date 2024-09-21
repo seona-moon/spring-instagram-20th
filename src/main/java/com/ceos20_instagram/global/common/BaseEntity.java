@@ -16,10 +16,10 @@ public abstract class BaseEntity {
     // 생성 일자, 수정 일자를 추가해주는 기본 엔티티
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false, columnDefinition = "timestamp")
+    @Column(name = "created_at", columnDefinition = "timestamp")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false, columnDefinition = "timestamp")
+    @Column(name = "updated_at", columnDefinition = "timestamp")
     private LocalDateTime modifiedAt;
 }
