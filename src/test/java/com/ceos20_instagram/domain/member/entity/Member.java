@@ -1,4 +1,4 @@
-package com.ceos20_instagram.domain.user.entity;
+package com.ceos20_instagram.domain.member.entity;
 
 import com.ceos20_instagram.global.common.BaseEntity;
 import jakarta.persistence.Column;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,6 @@ public class User extends BaseEntity {
 
     @Column(length = 50, nullable = false)
     private String nickname;
-
-    
-    private enum gender;
 
     @Column(length = 200)
     private String introduction;
