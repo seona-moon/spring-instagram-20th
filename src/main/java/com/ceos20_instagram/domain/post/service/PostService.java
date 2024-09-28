@@ -2,6 +2,7 @@ package com.ceos20_instagram.domain.post.service;
 
 import com.ceos20_instagram.domain.member.MemberRepository;
 import com.ceos20_instagram.domain.member.entity.Member;
+import com.ceos20_instagram.domain.member.service.MemberService;
 import com.ceos20_instagram.domain.post.PostRepository;
 import com.ceos20_instagram.domain.post.entity.Post;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,12 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     // 게시글 등록
     public Post createNewPost(Long memberId, String content, Optional<String> location) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 Member를 찾을 수 없습니다. id=" + memberId));
+        Member member = memberService.findMemberById(memberId);
         Post post = Post.builder().member(member).content(content).location(location.orElse(null)).build();
         Post savedPost = (Post) postRepository.save(post);  // post 정보를 DB에 저장
         return savedPost; // post 반환
