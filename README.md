@@ -236,7 +236,6 @@ private Member member;
     public class PostService {
         private final PostRepository postRepository;
         private final MemberRepository memberRepository;
-  }
     ```
 
   서비스는 보통 특정 도메인에 대한 비즈니스 로직을 처리하도록 설계됩니다. 만약 `MemberService`에서 `PostRepository`를 직접 가져오게 되면, `MemberService`가 **Member** 뿐만 아니라 **Post**에 대한 로직도 알게 되므로 역할이 모호해집니다.
