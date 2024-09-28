@@ -51,7 +51,7 @@ public class CommentService {
     }
 
     // 댓글 삭제
-    public void deleteComment(Long memberId, Long commentId) throws AccessDeniedException {
+    public void deleteComment(Long memberId, Long commentId) throws IllegalArgumentException {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 comment를 찾을 수 없습니다. id=" + commentId));
         if (!Objects.equals(memberId, comment.getMember().getId())) {
