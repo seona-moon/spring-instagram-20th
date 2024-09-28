@@ -276,8 +276,10 @@ private Member member;
 ## 3️⃣ Service 계층의 테스트를 진행
 ### PostServiceTest
 ![img_8.png](img_8.png)
-### CommentServiceTest!
+### CommentServiceTest
 ![img_7.png](img_7.png)
+### FollowServiceTest
+![img_5.png](img_5.png)
 ---
 
 ## 2024.09.09 DB 모델링 및 JPA
