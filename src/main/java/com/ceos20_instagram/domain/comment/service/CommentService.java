@@ -71,7 +71,7 @@ public class CommentService {
     // 작성자의 댓글 전체 조회
     @Transactional(readOnly = true)
     public List<Comment> findAccountCommentList(Member writer) {
-        return commentRepository.findAllByWriter(writer);
+        return commentRepository.findAllByMember(writer);
     }
 
     // 포스트의 댓글 전체 조회

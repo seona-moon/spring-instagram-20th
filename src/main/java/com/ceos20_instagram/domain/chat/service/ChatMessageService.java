@@ -47,7 +47,7 @@ public class ChatMessageService {
         ChatRoom chatRoom = (ChatRoom) chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(() -> new IllegalArgumentException("채팅방을 찾을 수 없습니다."));
 
-        return chatMessageRepository.findMessagesByChatRoomOrderByCreatedDateAsc(chatRoom);
+        return chatMessageRepository.findMessagesByChatRoomOrderByCreatedAtAsc(chatRoom);
     }
 
     // 메시지 삭제

@@ -5,6 +5,6 @@ import com.ceos20_instagram.domain.chat.entity.ChatRoom;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChatMessageRepository extends JpaRepository {
-    List<ChatMessage> findMessagesByChatRoomOrderByCreatedDateAsc(ChatRoom chatRoom);
+public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
+    List<ChatMessage> findMessagesByChatRoomOrderByCreatedAtAsc(ChatRoom chatRoom);
 }
