@@ -40,12 +40,12 @@ public class MemberService {
     @Transactional(readOnly = true)
     public Member findMemberById(Long id){
         return memberRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("해당 id를 가진 Account를 찾을 수 없습니다. id="+id));
+                .orElseThrow(()-> new EntityNotFoundException("해당 id를 가진 Member를 찾을 수 없습니다. id="+id));
     }
 
     @Transactional(readOnly = true)
     public Member findMemberByEmail(String email){
         return memberRepository.findMemberByEmail(email)
-                .orElseThrow(()-> new EntityNotFoundException("해당 email을 가진 Account를 찾을 수 없습니다. email="+email));
+                .orElseThrow(()-> new EntityNotFoundException("해당 email을 가진 Member를 찾을 수 없습니다. email="+email));
     }
 }
