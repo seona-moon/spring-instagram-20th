@@ -55,7 +55,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 comment를 찾을 수 없습니다. id=" + commentId));
         if (!Objects.equals(memberId, comment.getMember().getId())) {
-            throw new AccessDeniedException("삭제 권한이 없습니다.");
+            throw new IllegalArgumentException("해당 댓글을 삭제할 권한이 없습니다.");
         }
         commentRepository.delete(comment);
     }

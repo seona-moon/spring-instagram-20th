@@ -41,7 +41,7 @@ public class PostService {
     public void deletePost(Long postId, Long memberId) throws Throwable {
         Post post = findPostById(postId);
         if (!Objects.equals(memberId, post.getMember().getId())) {
-            throw new AccessDeniedException("삭제 권한이 없습니다.");
+            throw new IllegalArgumentException("해당 게시글을 삭제할 권한이 없습니다.");
         }
         postRepository.delete(post);
     }

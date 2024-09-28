@@ -26,4 +26,8 @@ public class ChatRoom extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "last_chat_message_id")
     private ChatMessage lastMessage;
+
+    public void updateLastMessage(ChatMessage message){
+        this.lastMessage = message;
+    }
 }
