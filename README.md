@@ -272,9 +272,12 @@ private Member member;
 ### - DM 서비스 코드
 
 ## 2️⃣ Repository 계층의 테스트를 진행
-
+![img_6.png](img_6.png)
 ## 3️⃣ Service 계층의 테스트를 진행
-
+### PostServiceTest
+![img_8.png](img_8.png)
+### CommentServiceTest!
+![img_7.png](img_7.png)
 ---
 
 ## 2024.09.09 DB 모델링 및 JPA
