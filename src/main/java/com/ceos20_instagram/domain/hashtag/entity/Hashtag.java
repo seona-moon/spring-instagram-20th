@@ -11,12 +11,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.Set;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Hashtag extends BaseEntity {
 
     @Id
@@ -26,8 +30,4 @@ public class Hashtag extends BaseEntity {
 
     @Column(nullable = false)
     private String hashtag;
-
-    // PostHashtag와 일대다 관계 (하나의 해시태그가 여러 게시물에 연결될 수 있음)
-    @OneToMany(mappedBy = "hashtag")
-    private Set<PostHashtag> postHashtags;
 }

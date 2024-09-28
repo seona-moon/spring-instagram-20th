@@ -13,12 +13,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.Set;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Post extends BaseEntity {
     @Id
     @Column(name = "post_id", nullable = false)
@@ -35,16 +39,4 @@ public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
-
-    // PostImage와 일대다 관계 (하나의 게시물이 여러 이미지를 가질 수 있음)
-    @OneToMany(mappedBy = "post")
-    private Set<PostImage> postImages;
-
-    // PostHashtag와 일대다 관계 (하나의 게시물이 여러 해시태그를 가질 수 있음)
-    @OneToMany(mappedBy = "post")
-    private Set<PostHashtag> postHashtags;
-
-    // PostLike와 일대다 관계 (하나의 게시물이 여러 "좋아요"를 받을 수 있음)
-    @OneToMany(mappedBy = "post")
-    private Set<PostLike> postLikes;
 }
