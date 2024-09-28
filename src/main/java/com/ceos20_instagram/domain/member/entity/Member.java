@@ -11,6 +11,8 @@ import com.ceos20_instagram.global.common.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,12 +20,15 @@ import jakarta.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 매개변수가 없는 생성자 자동 생성
+@AllArgsConstructor
 public class Member extends BaseEntity {
 
     @Id
@@ -31,26 +36,28 @@ public class Member extends BaseEntity {
     @Column(name = "member_id", nullable = false)
     private Long id;
 
-    @Column(length = 13, nullable = false)
+    @NonNull
     private String phone;
 
-    @Column(length = 200, nullable = false)
+    @NonNull
     private String email;
 
-    @Column(length = 200, nullable = false)
+    @NonNull
     private String password;
 
-    @Column(length = 20, nullable = false)
+    @NonNull
     private String name;
 
-    @Column(length = 50, nullable = false)
+    @NonNull
     private String nickname;
 
-    @Column(length = 200)
     private String introduction;
 
-    @Column
     private Timestamp birth;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
 
     @Column(columnDefinition = "text")
     private String profileUrl;
@@ -89,13 +96,4 @@ public class Member extends BaseEntity {
     // 채팅 메시지 연관관계
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatMessage> chatMessages;
-
-    // 필드 값을 설정할 수 있는 생성자 추가
-    public Member(String phone, String email, String password, String name, String nickname) {
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.nickname = nickname;
-    }
 }
