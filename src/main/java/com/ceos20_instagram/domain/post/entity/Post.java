@@ -32,7 +32,6 @@ public class Post extends BaseEntity {
     @Column(columnDefinition = "text")
     private String content;
 
-    @Column(length = 200)
     private String location;
 
     // Member와 다대일 관계 (여러 게시물이 하나의 사용자에 연결됨)
