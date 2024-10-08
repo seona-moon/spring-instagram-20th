@@ -6,6 +6,7 @@ import com.ceos20_instagram.domain.chat.entity.ChatRoom;
 import com.ceos20_instagram.domain.chat.entity.ChatRoomMember;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -36,15 +37,18 @@ public class ChatRoomService {
 
     // 채팅방 멤버 추가
     public void addMemberToChatRoom(ChatRoom chatRoom, List<Long> memberIds) {
-        for (Long memberId : memberIds) {
-            Member member = memberService.findMemberById(memberId);
+        List<Member> members = memberService.findMembersByIds(memberIds); // 한 번에 모든 멤버 조회
+        List<ChatRoomMember> chatRoomMembers = new ArrayList<>();
+
+        for (Member member : members) {
             ChatRoomMember chatRoomMember = ChatRoomMember.builder()
                     .chatRoom(chatRoom)
                     .member(member)
                     .build();
-
-            chatRoomMemberRepository.save(chatRoomMember);
+            chatRoomMembers.add(chatRoomMember);
         }
+
+        chatRoomMemberRepository.saveAll(chatRoomMembers); // 한 번에 모든 ChatRoomMember 저장
     }
 
     // 채팅방 삭제

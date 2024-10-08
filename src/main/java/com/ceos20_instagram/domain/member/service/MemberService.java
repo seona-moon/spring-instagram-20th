@@ -3,6 +3,7 @@ package com.ceos20_instagram.domain.member.service;
 import com.ceos20_instagram.domain.member.repository.MemberRepository;
 import com.ceos20_instagram.domain.member.entity.Member;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,12 @@ public class MemberService {
     public Member findMemberById(Long id){
         return memberRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("해당 id를 가진 Member를 찾을 수 없습니다. id="+id));
+    }
+
+    // 회원 전체 조회
+    @Transactional(readOnly = true)
+    public List<Member> findMembersByIds(List<Long> memberIds){
+        return memberRepository.findMembersByIds(memberIds);
     }
 
     @Transactional(readOnly = true)
