@@ -1,6 +1,6 @@
 package com.ceos20_instagram.domain.comment.service;
 
-import com.ceos20_instagram.domain.comment.CommentRepository;
+import com.ceos20_instagram.domain.comment.repository.CommentRepository;
 import com.ceos20_instagram.domain.comment.entity.Comment;
 import com.ceos20_instagram.domain.member.entity.Gender;
 import com.ceos20_instagram.domain.member.entity.Member;

@@ -1,7 +1,7 @@
 package com.ceos20_instagram.domain.chat.service;
 
-import com.ceos20_instagram.domain.chat.ChatMessageRepository;
-import com.ceos20_instagram.domain.chat.ChatRoomRepository;
+import com.ceos20_instagram.domain.chat.repository.ChatMessageRepository;
+import com.ceos20_instagram.domain.chat.repository.ChatRoomRepository;
 import com.ceos20_instagram.domain.chat.entity.ChatMessage;
 import com.ceos20_instagram.domain.chat.entity.ChatRoom;
 import com.ceos20_instagram.domain.member.entity.Member;

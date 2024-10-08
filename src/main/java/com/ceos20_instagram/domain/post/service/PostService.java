@@ -1,16 +1,13 @@
 package com.ceos20_instagram.domain.post.service;
 
-import com.ceos20_instagram.domain.member.MemberRepository;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
-import com.ceos20_instagram.domain.post.PostRepository;
+import com.ceos20_instagram.domain.post.repository.PostRepository;
 import com.ceos20_instagram.domain.post.entity.Post;
 import jakarta.persistence.EntityNotFoundException;
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import javax.swing.text.AbstractDocument.Content;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,13 +1,12 @@
 package com.ceos20_instagram.domain.comment.service;
 
-import com.ceos20_instagram.domain.comment.CommentRepository;
+import com.ceos20_instagram.domain.comment.repository.CommentRepository;
 import com.ceos20_instagram.domain.comment.entity.Comment;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
 import com.ceos20_instagram.domain.post.entity.Post;
 import com.ceos20_instagram.domain.post.service.PostService;
 import jakarta.persistence.EntityNotFoundException;
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;

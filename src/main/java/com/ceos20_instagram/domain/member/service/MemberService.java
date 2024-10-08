@@ -1,6 +1,6 @@
 package com.ceos20_instagram.domain.member.service;
 
-import com.ceos20_instagram.domain.member.MemberRepository;
+import com.ceos20_instagram.domain.member.repository.MemberRepository;
 import com.ceos20_instagram.domain.member.entity.Member;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

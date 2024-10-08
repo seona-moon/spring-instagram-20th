@@ -1,12 +1,11 @@
 package com.ceos20_instagram.domain.follow.service;
 
-import com.ceos20_instagram.domain.follow.FollowRepository;
+import com.ceos20_instagram.domain.follow.repository.FollowRepository;
 import com.ceos20_instagram.domain.follow.entity.Follow;
 import com.ceos20_instagram.domain.member.entity.Gender;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

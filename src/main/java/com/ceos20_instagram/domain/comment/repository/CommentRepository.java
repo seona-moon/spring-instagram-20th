@@ -1,4 +1,4 @@
-package com.ceos20_instagram.domain.comment;
+package com.ceos20_instagram.domain.comment.repository;
 
 import com.ceos20_instagram.domain.comment.entity.Comment;
 import com.ceos20_instagram.domain.member.entity.Member;

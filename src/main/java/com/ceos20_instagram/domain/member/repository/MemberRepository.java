@@ -1,4 +1,4 @@
-package com.ceos20_instagram.domain.member;
+package com.ceos20_instagram.domain.member.repository;
 
 import com.ceos20_instagram.domain.member.entity.Member;
 import java.util.Optional;

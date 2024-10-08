@@ -3,7 +3,7 @@ package com.ceos20_instagram.domain.post.service;
 import com.ceos20_instagram.domain.member.entity.Gender;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
-import com.ceos20_instagram.domain.post.PostRepository;
+import com.ceos20_instagram.domain.post.repository.PostRepository;
 import com.ceos20_instagram.domain.post.entity.Post;
 import jakarta.persistence.EntityNotFoundException;
 import java.sql.Timestamp;

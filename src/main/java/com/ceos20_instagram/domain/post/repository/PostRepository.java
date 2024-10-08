@@ -1,4 +1,4 @@
-package com.ceos20_instagram.domain.post;
+package com.ceos20_instagram.domain.post.repository;
 
 import com.ceos20_instagram.domain.chat.entity.ChatRoomMember;
 import com.ceos20_instagram.domain.member.entity.Member;

@@ -1,8 +1,8 @@
 package com.ceos20_instagram;
-import com.ceos20_instagram.domain.member.MemberRepository;
+import com.ceos20_instagram.domain.member.repository.MemberRepository;
 import com.ceos20_instagram.domain.member.entity.Gender;
 import com.ceos20_instagram.domain.member.entity.Member;
-import com.ceos20_instagram.domain.post.PostRepository;
+import com.ceos20_instagram.domain.post.repository.PostRepository;
 import com.ceos20_instagram.domain.post.entity.Post;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;

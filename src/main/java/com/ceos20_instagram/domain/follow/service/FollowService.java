@@ -1,5 +1,5 @@
 package com.ceos20_instagram.domain.follow.service;
-import com.ceos20_instagram.domain.follow.FollowRepository;
+import com.ceos20_instagram.domain.follow.repository.FollowRepository;
 import com.ceos20_instagram.domain.follow.entity.Follow;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
