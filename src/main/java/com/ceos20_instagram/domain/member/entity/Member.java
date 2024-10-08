@@ -54,5 +54,5 @@ public class Member extends BaseEntity {
     private String profileUrl;
 
     @Column(columnDefinition = "text")
-    private String profile_image;
+    private String profileImage;
 }
