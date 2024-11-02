@@ -1,14 +1,16 @@
 package com.ceos20_instagram.domain.comment.service;
 
-import com.ceos20_instagram.domain.comment.repository.CommentRepository;
+import com.ceos20_instagram.domain.comment.dto.CommentCreateRequestDto;
+import com.ceos20_instagram.domain.comment.dto.CommentResponseDto;
 import com.ceos20_instagram.domain.comment.entity.Comment;
+import com.ceos20_instagram.domain.comment.repository.CommentRepository;
 import com.ceos20_instagram.domain.member.entity.Member;
 import com.ceos20_instagram.domain.member.service.MemberService;
 import com.ceos20_instagram.domain.post.entity.Post;
 import com.ceos20_instagram.domain.post.service.PostService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,61 +24,55 @@ public class CommentService {
     private final PostService postService;
 
     // 댓글 생성
-    public Comment createComment(Long postId, Long memberId, String content) throws Throwable {
-        // parentId 없이 호출할 경우 null로 설정 (메서드 오버로딩)
-        return createComment(postId, memberId, content, null);
-    }
-
-    public Comment createComment(Long postId, Long memberId, String content, Long parentId) throws Throwable {
-        Member writer = memberService.findMemberById(memberId);
-        Post post = postService.findPostById(postId);
+    public CommentResponseDto createComment(CommentCreateRequestDto dto) throws Throwable {
+        Member writer = memberService.findMemberById(dto.getMemberId());
+        Post post = postService.findPostById(dto.getPostId());
 
         // 부모 댓글이 있을 경우 찾기
         Comment parentComment = null;
-        if (parentId != null) {
-            parentComment = commentRepository.findById(parentId)
-                    .orElseThrow(() -> new IllegalArgumentException("부모 댓글이 존재하지 않습니다."));
+        if (dto.getParentId() != null) {
+            parentComment = commentRepository.findById(dto.getParentId())
+                                             .orElseThrow(() -> new IllegalArgumentException("부모 댓글이 존재하지 않습니다."));
         }
 
         Comment comment = Comment.builder()
-                .content(content)
-                .member(writer)
-                .parent(parentComment) // 부모 댓글 설정 (없으면 null)
-                .post(post)
-                .build();
-        commentRepository.save(comment);
+                                 .content(dto.getContent())
+                                 .member(writer)
+                                 .parent(parentComment)
+                                 .post(post)
+                                 .build();
 
-        return comment;
-    }
-
-    // 댓글 삭제
-    public void deleteComment(Long memberId, Long commentId) throws IllegalArgumentException {
-        Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 comment를 찾을 수 없습니다. id=" + commentId));
-        if (!Objects.equals(memberId, comment.getMember().getId())) {
-            throw new IllegalArgumentException("해당 댓글을 삭제할 권한이 없습니다.");
-        }
-        commentRepository.delete(comment);
+        Comment savedComment = commentRepository.save(comment);
+        return CommentResponseDto.from(savedComment);
     }
 
     // 댓글 단일 조회
     @Transactional(readOnly = true)
-    public Comment findCommentById(Long commentId) {
+    public CommentResponseDto findCommentById(Long commentId) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new EntityNotFoundException("해당 id를 가진 comment를 찾을 수 없습니다. id=" + commentId));
-        return comment;
+                                           .orElseThrow(() -> new EntityNotFoundException(
+                                                   "해당 id를 가진 comment를 찾을 수 없습니다. id=" + commentId));
+        return CommentResponseDto.from(comment);
     }
 
     // 작성자의 댓글 전체 조회
     @Transactional(readOnly = true)
-    public List<Comment> findAccountCommentList(Member writer) {
-        return commentRepository.findAllByMember(writer);
+    public List<CommentResponseDto> findAccountCommentList(Long memberId) {
+        Member writer = memberService.findMemberById(memberId);
+        List<Comment> comments = commentRepository.findAllByMember(writer);
+        return comments.stream()
+                       .map(CommentResponseDto::from)
+                       .collect(Collectors.toList());
     }
 
     // 포스트의 댓글 전체 조회
     @Transactional(readOnly = true)
-    public List<Comment> findPostCommentList(Long postId) throws Throwable {
+    public List<CommentResponseDto> findPostCommentList(Long postId) throws Throwable {
         Post post = postService.findPostById(postId);
-        return commentRepository.findAllByPost(post);
+        List<Comment> comments = commentRepository.findAllByPost(post);
+        return comments.stream()
+                       .map(CommentResponseDto::from)
+                       .collect(Collectors.toList());
     }
 }
+
