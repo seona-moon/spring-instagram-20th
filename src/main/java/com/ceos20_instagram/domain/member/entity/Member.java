@@ -50,9 +50,13 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Enumerated(value = EnumType.STRING)
+    private UserRole role;
+
     @Column(columnDefinition = "text")
     private String profileUrl;
 
     @Column(columnDefinition = "text")
     private String profileImage;
+
 }
