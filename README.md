@@ -21,6 +21,72 @@ CEOS 20th BE study - instagram clone coding
 | ✅ test      | 테스트 코드 추가 및 수정                     |
 | 💄 ui       | UI, 스타일 관련 파일 추가 및 수정 ex) .css     |
 
+## 2024.11.16 Docker
+
+### Docker란?
+
+Docker는 애플리케이션을 컨테이너로 묶어 어디서나 동일한 환경에서 실행할 수 있도록 도와주는 도구입니다. 쉽게 말해 "애플리케이션과 필요한 설정 및 의존성을 포함한 실행 가능한 패키지"를 생성할 수 있게 합니다.
+
+대부분의 애플리케이션 배포는 아래와 같이 실행 파일과 의존성을 일일이 설정해야 합니다.
+
+```bash
+java -jar your-application.jar
+sudo apt install mysql
+```
+
+또는 운영체제별 환경 설정 차이로 문제가 생기곤 합니다. 이러한 문제를 해결하기 위해 Docker가 사용됩니다.
+
+---
+
+### Dockerfile이란?
+
+Dockerfile은 Docker 컨테이너를 생성하기 위한 설정 파일입니다. 애플리케이션을 실행하기 위해 필요한 명령어와 설정을 명시해줍니다. 아래는 간단한 `Dockerfile` 예시입니다.
+
+```dockerfile
+# 1. Java 17 JDK가 포함된 이미지를 사용
+FROM eclipse-temurin:17-jdk-focal
+
+# 2. 빌드된 JAR 파일의 경로를 변수로 설정
+ARG JAR_FILE=build/libs/*.jar
+
+# 3. JAR 파일을 Docker 컨테이너 내부로 복사
+COPY ${JAR_FILE} app.jar
+
+# 4. 애플리케이션 실행 명령어
+ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "/app.jar"]
+```
+
+위와 같이 작성된 Dockerfile은 애플리케이션을 실행하기 위해 Java 환경을 준비하고, JAR 파일을 컨테이너에 복사하여 실행합니다.
+
+---
+
+### Docker 이미지 빌드하기
+
+Dockerfile을 작성한 후, 아래 명령어로 Docker 이미지를 생성할 수 있습니다.
+
+```bash
+docker build -t instagram-project .
+```
+
+- **`-t instagram-project`**: 생성할 Docker 이미지의 이름을 지정합니다.
+- **`.`**: 현재 디렉토리에 있는 Dockerfile을 사용합니다.
+
+---
+
+### Docker 컨테이너 실행하기
+
+Docker 이미지를 기반으로 컨테이너를 실행하는 명령어는 다음과 같습니다.
+
+```bash
+docker run -d -p 8080:8080 --name instagram-container instagram-project
+```
+
+- **`-d`**: 컨테이너를 백그라운드에서 실행합니다.
+- **`-p 8080:8080`**: 호스트의 8080 포트를 컨테이너의 8080 포트에 매핑합니다.
+- **`--name instagram-container`**: 컨테이너 이름을 지정합니다.
+
+---
+
 ## 2024.11.11 Spring Security와 로그인
 
 ## 쿠키 (Cookie)
@@ -220,7 +286,7 @@ JWT는 인증 정보를 효율적으로 전송할 수 있지만, 몇 가지 단�
 
 [DTO에는 어떤 Annotation을 붙여야 할까?](https://velog.io/@maxgun98/DTO에는-어떤-Annotation을-붙여야-할까)
 
-### 정적 팩토리 메서드란?
+.### 정적 팩토리 메서드란?
 
 GoF의 팩토리 패턴에서 유래된 이름으로, 말 그대로`객체를 생성하는 역할을 하는 메소드`이다.
 
@@ -266,7 +332,7 @@ public ProductResponseDto update(Long id, ProductRequestDto productRequestDto) {
 
 이후 이런 식으로 new 를 통해서 새로운 dto객체를 생성하여 만들어주는 방식을 사용하고 있었다.
 
-dto의 생성자를 만들어 주고, 이를 사용하는 static from 메소드를 생성해주었다.
+dto의 생성자를 만들어 주고, 이를 사용하는 static from 메소드를 생성해주었다
 
 ```jsx
 @Transactional(readOnly = true)
