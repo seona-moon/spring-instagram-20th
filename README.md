@@ -21,6 +21,53 @@ CEOS 20th BE study - instagram clone coding
 | ✅ test      | 테스트 코드 추가 및 수정                     |
 | 💄 ui       | UI, 스타일 관련 파일 추가 및 수정 ex) .css     |
 
+## 2024.11.23 Deploy
+
+- **프로젝트 빌드**
+
+  과제에서 제공된 Spring 애플리케이션을 로컬 환경에서 성공적으로 빌드하기 위해 `./gradlew clean build` 명령어를 실행했습니다. 이 과정에서 필요한 의존성이 올바르게
+  다운로드되었고, `build/libs` 디렉토리에 실행 가능한 JAR 파일이 생성되었습니다.
+
+- **Dockerfile 작성 및 이미지 빌드**
+
+  배포 환경 차이를 최소화하기 위해 Dockerfile을 작성했습니다.
+
+    - 베이스 이미지는 `eclipse-temurin:17-jdk-focal`을 사용하여 Java 17 환경을 준비했습니다.
+    - 빌드된 JAR 파일을 Docker 이미지에 포함시키기 위해 다음과 같은 명령을 작성했습니다:
+
+        ```
+        FROM eclipse-temurin:17-jdk-focal
+        ARG JAR_FILE=build/libs/*.jar
+        COPY ${JAR_FILE} app.jar
+        ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "/app.jar"]
+        ```
+
+    - 이후, `docker build -t [docker-id]/[repository-name] .` 명령어를 실행해 Docker 이미지를 생성했습니다.
+- **Docker Hub에 이미지 업로드**
+
+  Docker 이미지를 배포하기 위해 `docker push [docker-id]/[repository-name]` 명령어를 사용하여 이미지를 Docker Hub에 업로드했습니다.
+
+- **AWS EC2 설정**
+
+  Elastic IP가 연결된 EC2 인스턴스를 생성하고 SSH를 통해 접속했습니다.
+
+    - 우선, 시스템 패키지를 업데이트하기 위해 `sudo apt update`를 실행했습니다.
+    - 스왑 메모리를 설정하여 메모리 부족으로 인한 장애를 예방했습니다.
+- **Docker 설치 및 이미지 실행**
+
+  EC2 인스턴스에서 Docker를 설치(`sudo apt install docker.io`)한 후, Docker Hub에서 이미지를 가져와 실행했습니다:
+
+    ```bash
+    docker pull [docker-id]/[repository-name]
+    docker run -d -p 8080:8080 --name app-container [docker-id]/[repository-name]
+    ```
+
+  여기서 `-p 8080:8080` 옵션은 컨테이너와 호스트 간 포트를 매핑하여 외부에서 애플리케이션에 접근할 수 있도록 설정합니다.
+
+- **서비스 테스트**
+
+  EC2의 퍼블릭 IP(`http://[EC2 IP]:8080`)를 통해 애플리케이션이 정상적으로 실행되는지 확인했습니다. 로그를 검토하며 성공적으로 배포되었음을 확인했습니다.
+
 ## 2024.11.16 Docker
 
 ### Docker란?
